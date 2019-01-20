@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,14 +22,13 @@ public class Anagrams {
 		}
 		return words;
 	}
-
-	public static void main(String[] args) {
-		
+	
+	static boolean isAnagram(String a, String b) {
 		Scanner scan = new Scanner(System.in);
         String word1 = scan.next();
         String word2 = scan.next();
         scan.close();
-		String answer = "Not Anagrams";	
+        boolean answer = false;	
 		ArrayList<Character> w1 = separateWords(word1.toLowerCase());
 		w1.sort(null);
 		ArrayList<Character> w2 = separateWords(word2.toLowerCase());
@@ -38,9 +36,13 @@ public class Anagrams {
 		if (word1.length() == word2.length()) {
 			HashMap<Character, Integer> words1 = countWords(w1);
 			HashMap<Character, Integer> words2 = countWords(w2);
-			if (words1.equals(words2)) answer = "Anagrams";
-		}
-		System.out.println(answer);		
+			if (words1.equals(words2)) answer = true;
+		}		
+		System.out.println(answer);	
+    }
+
+	public static void main(String[] args) {		
+			
 	}
 
 }

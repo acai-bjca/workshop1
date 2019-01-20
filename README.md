@@ -96,6 +96,7 @@
 	>
 	>En este caso como necesitamos un proyecto ya existente, las dependencias son ideales pues estas hacen uso del jar de otros proyectos y los busca y baja automáticamente
 * Use the following command to execute the file-spy application `mvn exec:java -Dexec.mainClass="edu.eci.FileSpy"`. Take the output screenshot.
+	
 	![](https://github.com/acai-bjca/workshop1/blob/master/ejecutando_FileSpy.PNG)  
 * But this time you should knew that the application detect events in a folder when you add new files and print on the screen all the files with the `text/csv` extension. Test the application using the examples files. Take the output screenshot.
 	![](https://github.com/acai-bjca/workshop1/blob/master/Probando_FileSpy.PNG)

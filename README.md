@@ -77,3 +77,38 @@
 * Using the terminal execute the command `mvn package`. Take the output screenshot. What is this command using for?
 	![](https://github.com/acai-bjca/workshop1/blob/master/2-package.PNG)
 	>`mvn package:` empaqueta el código compilado en el formato que se estableció, como un JAR
+* Using the terminal execute the command `mvn install`. Take the output screenshot. What is this command using for?
+	![](https://github.com/acai-bjca/workshop1/blob/master/3-install.PNG)
+    >`mvn install:` instala el paquete en el repositorio local, para usarlo como una dependencia en otros proyectos a nivel local.
+* Generate a new maven project in other folder using the maven command line tools, this project should has as groupId "edu.eci" and as artifactId "another-maven-project". Take the output screenshot.
+    ![](https://github.com/acai-bjca/workshop1/blob/master/generandoNuevoProyecto.PNG)
+* Replace the code of the App.java class with the following code and do all the necessary steps to compile the code.
+	![](https://github.com/acai-bjca/workshop1/blob/master/1.2-compile.PNG)
+	>Para que el nuevo proyecto lograra compilar agregamos la siguiente dependencia al POM del proyecto
+	>
+	```html
+	<dependency> 
+	  <groupId>edu.eci</groupId> 
+	  <artifactId>file-spy</artifactId> 
+	  <version>1.0-SNAPSHOT</version> 
+	</dependency>
+	```
+	>
+	>En este caso como necesitamos un proyecto ya existente, las dependencias son ideales pues estas hacen uso del jar de otros proyectos y los busca y baja automáticamente
+* Use the following command to execute the file-spy application `mvn exec:java -Dexec.mainClass="edu.eci.FileSpy"`. Take the output screenshot.
+	![](https://github.com/acai-bjca/workshop1/blob/master/ejecutando_FileSpy.PNG)  
+* But this time you should knew that the application detect events in a folder when you add new files and print on the screen all the files with the `text/csv` extension. Test the application using the examples files. Take the output screenshot.
+	![](https://github.com/acai-bjca/workshop1/blob/master/Probando_FileSpy.PNG)
+***
+##Bibliografía
+* *Tutorialspoint. [Maven - Build Life Cycle]. Recuperado de https://codesjava.com/maven-clean-lifecycle-phases*
+
+* *CódigosJava. [Fases De Ciclo De Vida Limpias De Maven]. Recuperado de https://codesjava.com/maven-clean-lifecycle-phases*
+* *Stackoverrun. (2017, 18 enero). [¿Qué es una dependencia transitiva de Maven?]. Recuperado de https://stackoverrun.com/es/q/11481805*
+
+* *Stackoverrun. (2013, 20 marzo). [Agregar el jar de otro proyecto como un recurso usando Maven]. Recuperado de https://stackoverrun.com/es/q/4212835*
+
+***
+**Amalia Inés Alfonso Campuzano**
+
+**Carlos Andrés Medina Rivas**

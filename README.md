@@ -1,8 +1,122 @@
-# Workshop1
+# Laboratorio 1 - Git y Maven
 ## Git Basic Concepts
+### Setup
+- Descargar git (en este caso usamos el de windows) desde [https://gitforwindows.org/](https://gitforwindows.org/)
+
+	![](/Imágenes/DescargarGit.PNG)
+
+- En seguida realizamos la instalación.
+
+	![](/Imágenes/InstalaciónGit1.PNG)
+	![](/Imágenes/InstalaciónGit2.PNG)
+
+- Verificamos que se haya instalado correctamente
+
+	![](/Imágenes/VerificaciónGit.PNG)
+### Creating a local repository
+- Create a folder.
+
+	![](/Imágenes/CrearFolder.PNG)
+- Using the command line to  go to the folder created in the previous step.
+
+	![](/Imágenes/IrFolder.PNG)
+- Use **git init** command to create a new local repository
+
+	![](/Imágenes/GitInit.PNG)
+### Let's  code
+- Using your favorite IDE, create a new java project using the folder you have created previously as Workspace
+
+	![](/Imágenes/CreandoJavaProyecto1.PNG)
+	![](/Imágenes/CreandoJavaProyecto2.PNG)
+- Solve the **Java Anagrams** problem using java
+
+```java
+	import java.util.Scanner;
+
+	public class Java_Anagrams {
+    
+		public static String[] separateWords(String w) {
+	        String[] words = new String[w.length()];
+	        for (int i = 0; i<w.length(); i++) words[i] = ""+w.charAt(i);
+	        return words;
+	    }
+
+	    public static String[] ordenar(String[] w) {
+	        String temp = "";
+	        boolean restart = false;
+	        int correctPosition = 0, i = 0, j = 0;
+	        while (i<w.length) {
+	            for(j = correctPosition; j<w.length && !restart; j++) {
+	                if (i != j && w[i].compareTo(w[j]) > 0){
+	                    temp = w[i];
+	                    w[i] = w[j];
+	                    w[j] = temp;
+	                    restart = true;
+	                }
+	            }
+	            if (restart) {
+	            	restart = false;
+	                i = correctPosition;
+	            }
+	            else {
+	            	i += 1;
+	            	if (j==w.length) correctPosition = i;
+	            }            
+	        }
+	        return w;
+	    }
+	
+	    public static int coundWords(String letter, String[] word) {
+	    	int cant = 0;
+	    	for(int i = 0; i<word.length; i++) {
+	    		if (word[i].equals(letter)) cant += 1;
+	    	}
+	    	return cant;
+	    }
+	
+	    public static boolean isAnagram(String a, String b) {
+	        boolean answer = false;    
+	        String[] w1 = separateWords(a.toLowerCase());
+	        w1 = ordenar(w1);
+	        String[] w2 = separateWords(b.toLowerCase());
+	        w2 = ordenar(w2);
+	        if (a.length() == b.length()) {
+	        	String letter = "";
+	        	boolean has = true;
+	        	int cant1 = 0, cant2 = 0;
+	        	for(int i = 0; i<w1.length && has; i++) {
+	        		letter = w1[i];
+	        		cant1 = coundWords(letter, w1);
+	        		cant2 = coundWords(letter, w2);
+	        		if (cant1 != cant2) has = false;
+	        	}
+	        	if (has) answer = true;
+	        }        
+	        return answer;
+	    }
+
+        public static void main(String[] args) {	    
+	        Scanner scan = new Scanner(System.in);
+	        String a = scan.next();
+	        String b = scan.next();
+	        scan.close();
+	        boolean ret = isAnagram(a, b);
+	        System.out.println( (ret) ? "Anagrams" : "Not Anagrams" );
+    	}
+    }
+```
+
+El ejercicio pasó en HackerRank
+
+![](/Imágenes/Anagrams.PNG)
+### Preserving our changes
 * What is the purpose of  **git add .** command?
+
+	![](/Imágenes/GitAdd.PNG)
     >Rta: El propósito de este comando es conservar los cambios realizados en un repositorio y prepararlos para la posterior confirmación.
 * Why we used **git commit -m "Message"**?
+
+	![](/Imágenes/GitCommit.PNG)
     >Rta: Lo usamos para confirmar los cambios marcándolos con un mensaje y deja listos los cambios para ser subidos.
 * What is the purpose of the **git push origin master** command?
     >Rta: Este comando sube al repositorio remoto los cambios confirmados anteriormente.

@@ -118,16 +118,72 @@ El ejercicio pasó en HackerRank
 
 	![](/Imágenes/GitCommit.PNG)
     >Rta: Lo usamos para confirmar los cambios marcándolos con un mensaje y deja listos los cambios para ser subidos.
+### Using Github
+Ambos miembros del equipo ya contabamos con un usuario en Github.
+Unimos el repositorio local al remoto mediante **git remote add origin server**
+ 
+![](/Imágenes/UnirRepositorio.PNG)
+
 * What is the purpose of the **git push origin master** command?
+
+	![](/Imágenes/GitPushOrigin.PNG)
     >Rta: Este comando sube al repositorio remoto los cambios confirmados anteriormente.
+### Cloning our repository
 * What is the purpose of the **git clone 'repository'** command?
+
+	![](/Imágenes/GitClone.PNG)
     >Rta: Este comando clona un repositorio remoto creando uno local.
+### Let's code
+```java 
+	import java.util.Scanner;
+
+	public class ReadLines {
+
+		public static void main(String[] args) {
+			
+			Scanner scan = new Scanner(System.in);
+			
+			String line = "";
+			int count = 0;
+			while (scan.hasNext()) {
+				line = scan.nextLine();
+				count += 1;
+				System.out.println(count+" "+line);
+			}
+			
+			scan.close();
+		}
+    }
+```
+
+El ejercicio pasó en HackerRank
+
+![](/Imágenes/ReadLines.PNG)
+
 * Screenshots Commits
-	![](https://github.com/acai-bjca/workshop1/blob/master/Screenshot.PNG)
+
+	![](/Imágenes/Screenshot.PNG)
 * What **git pull origin master** command does?
+
+	![](/Imágenes/GitPullOrigin.PNG)
     >Rta: Este comando baja los cambios del repositorio remoto que no están actualizados en el repositorio local.
+
 ## Maven Basic Concepts
+### Install Maven
+- Para instalar Maven (en este caso usamos el de windows) entramos a [https://maven.apache.org/install.html](https://maven.apache.org/install.html)
+
+	![](/Imágenes/InstalarMaven.PNG)
+- Verificamos que se haya instalado
+
+	![](/Imágenes/VerificaciónMaven.PNG)
 ### Create Maven Project
+* Create a new maven project using the command **mvn archetype:generate -B -DgroupId=edu.eci -DartifactId=file-spy**
+	
+	![](/Imágenes/CreandoProyectoMVN1.PNG)
+
+	Para verificar que la estructura quedó correcta, miramos el árbol del proyecto
+
+	![](/Imágenes/ArbolFileSpy.PNG)
 * What do means the -B option in the command?
 	>Muestra en un modo no interactivo es decir, muestra la información que está ejecutando de una forma plana.
 * What do means the -D option in the command?
@@ -137,8 +193,49 @@ El ejercicio pasó en HackerRank
 	
     >**artifactId:** Es el nombre del archivo jar sin versión, en pocas palabras es el nombre real del proyecto.
 * Describe the content of the directory that has been created.
-	>Contiene una carpeta src la cuál incluye el proyecto como tal, es decir, las carpetas para los archivos y las pruebas. Además contiene un archivo pom, el cual se usa para hacer las configuraciones y ajustes del proyecto en cuanto a dependencias, plugins, propiedades, entre otros.
+	>Contiene una carpeta src la cuál incluye el proyecto como tal, es decir, las carpetas para los archivos y las pruebas. Además contiene un archivo pom, el cual se usa para hacer las configuraciones y ajustes del proyecto en cuanto a dependencias, plugins, propiedades, entre otros. En inicio, contiene dos carpetas dentro del src, main y test, cada una con la estructura definida y con una clase App prefedinida.
+* Create the folders `src/main/resources` and `src/test/resources`
+
+	![](/Imágenes/ArbolFileSpy-Resources.PNG)
 ### POM file
+```xml
+	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	  <modelVersion>4.0.0</modelVersion>
+	  <groupId>edu.eci</groupId>
+	  <artifactId>file-spy</artifactId>
+	  <packaging>jar</packaging>
+	  <version>1.0-SNAPSHOT</version>
+	  <name>file-spy</name>
+	  <url>http://maven.apache.org</url>
+	  <dependencies>
+	    <dependency>
+	      <groupId>junit</groupId>
+	      <artifactId>junit</artifactId>
+	      <version>3.8.1</version>
+	      <scope>test</scope>
+	    </dependency>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-core</artifactId>
+			<version>1.20</version>
+		</dependency>
+	  </dependencies>
+	  <build>
+	    <plugins>
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-compiler-plugin</artifactId>
+	            <configuration>
+	                <source>1.8</source>
+	                <target>1.8</target>
+	            </configuration>
+	        </plugin>
+	    </plugins>
+	  </build>
+	</project>
+```
+
 * What do means the word SNAPSHOT in the version value?
 	>Significa que es la versión de mvn que está por lanzarse y que está en tiempo de desarrollo.
 * What is the purpose of the packing tag into the POM file?
@@ -147,7 +244,7 @@ El ejercicio pasó en HackerRank
 	>Permite traer proyectos ya existentes que son necesarios para que el proyecto se ejecute correctamente según lo que se necesite.
 ### Dependency Management
 * What is the functionality of FileSpy class?
-	>Esta clase hace una detección de archivos y de los cambios que les ocurre, de la siguiente manera: Define un tipo de archivo que se quiera detectar en una ruta (directorio) específica. Se genera una lista de eventos que se están escuchando en dicha ruta. Cada vez que se detectan eventos(cambios) verifica si los archivos encontrados son el mismo tipo de archivo que el definido y muestra un mensaje cada vez que encuentra uno.
+	>Esta clase hace una detección de archivos y de los cambios que les ocurre, de la siguiente manera: Define un tipo de archivo que se quiera detectar en una ruta (directorio) específica. Se genera una lista de eventos que se están escuchando en dicha ruta. Cada vez que se detectan eventos(cambios) verifica si los archivos encontrados son el mismo tipo de archivo que el definido y muestra un mensaje cada vez que encuentra uno (cuando se crea).
 ### Building Lifecycles and Plugins
 * The three principal Maven lifecycles are `clean`, `default`and `site`. Describe each one.
     >**clean:**  Este ciclo de vida maneja la limpieza del proyecto y se compone de tres fases. 
@@ -184,37 +281,42 @@ El ejercicio pasó en HackerRank
 	>`site-deploy:` implementa la documentación del sitio generado en un servidor web específico.
 
 * Using the terminal execute the command `mvn compile`. Take the output screenshot. What is this command using for? What are transitive dependencies?
-    ![](https://github.com/acai-bjca/workshop1/blob/master/1-compile.PNG)
+
+    ![](/Imágenes/1-compile.PNG)
     >`mvn compile:` compila el código fuente del proyecto.
     >
     >`dependencias transitivas:` son dependencias que no se colocan en el POM, porque son arrastradas por otras dependencias que las necesitan.
 * Using the terminal execute the command `mvn package`. Take the output screenshot. What is this command using for?
-	![](https://github.com/acai-bjca/workshop1/blob/master/2-package.PNG)
+
+	![](/Imágenes/2-package.PNG)
 	>`mvn package:` empaqueta el código compilado en el formato que se estableció, como un JAR
 * Using the terminal execute the command `mvn install`. Take the output screenshot. What is this command using for?
-	![](https://github.com/acai-bjca/workshop1/blob/master/3-install.PNG)
+
+	![](/Imágenes/3-install.PNG)
     >`mvn install:` instala el paquete en el repositorio local, para usarlo como una dependencia en otros proyectos a nivel local.
 * Generate a new maven project in other folder using the maven command line tools, this project should has as groupId "edu.eci" and as artifactId "another-maven-project". Take the output screenshot.
-    ![](https://github.com/acai-bjca/workshop1/blob/master/generandoNuevoProyecto.PNG)
+
+    ![](/Imágenes/generandoNuevoProyecto.PNG)
 * Replace the code of the App.java class with the following code and do all the necessary steps to compile the code.
-	![](https://github.com/acai-bjca/workshop1/blob/master/1.2-compile.PNG)
+
+	![](/Imágenes/1.2-compile.PNG)
 	>Para que el nuevo proyecto lograra compilar agregamos la siguiente dependencia al POM del proyecto
 	>
 	```html
-	<dependency> 
-	  <groupId>edu.eci</groupId> 
-	  <artifactId>file-spy</artifactId> 
-	  <version>1.0-SNAPSHOT</version> 
-	</dependency>
+		<dependency> 
+		  <groupId>edu.eci</groupId> 
+		  <artifactId>file-spy</artifactId> 
+		  <version>1.0-SNAPSHOT</version> 
+		</dependency>
 	```
 	>
 	>En este caso como necesitamos un proyecto ya existente, las dependencias son ideales pues estas hacen uso del jar de otros proyectos y los busca y baja automáticamente
 * Use the following command to execute the file-spy application `mvn exec:java -Dexec.mainClass="edu.eci.FileSpy"`. Take the output screenshot.
 	
-	![](https://github.com/acai-bjca/workshop1/blob/master/ejecutando_FileSpy.PNG)  
+	![](/Imágenes/ejecutando_FileSpy.PNG)  
 * But this time you should knew that the application detect events in a folder when you add new files and print on the screen all the files with the `text/csv` extension. Test the application using the examples files. Take the output screenshot.
-	![](https://github.com/acai-bjca/workshop1/blob/master/Probando_FileSpy.PNG)
-***
+
+	![](/Imágenes/Probando_FileSpy.PNG)
 ## Bibliografía
 * *Tutorialspoint. [Maven - Build Life Cycle]. Recuperado de https://codesjava.com/maven-clean-lifecycle-phases*
 
@@ -224,6 +326,8 @@ El ejercicio pasó en HackerRank
 * *Stackoverrun. (2013, 20 marzo). [Agregar el jar de otro proyecto como un recurso usando Maven]. Recuperado de https://stackoverrun.com/es/q/4212835*
 
 ***
-**Amalia Inés Alfonso Campuzano**
+**Autores:**
 
-**Carlos Andrés Medina Rivas**
+- *Amalia Inés Alfonso Campuzano*
+
+- *Carlos Andrés Medina Rivas*
